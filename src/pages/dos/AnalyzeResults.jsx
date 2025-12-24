@@ -321,7 +321,7 @@ if (percentage >= 40) return 'Some concepts need more review. Additional support
 return 'Let us discuss strategies and resources to help improve your understanding.';
   };
 
-  // Get default class teacher comment based on performance
+
   const getDefaultClassTeacherComment = (student) => {
     const totalMarks = Math.round(student.total_score || 0);
     const percentage = (totalMarks / 1100) * 100;
@@ -335,31 +335,29 @@ return 'Let us discuss strategies and resources to help improve your understandi
     return 'Needs urgent academic intervention and parental support for improvement.';
   };
 
-  // View student details
   const handleViewStudent = (student) => {
     setSelectedStudent(student);
   };
-// Get encouraging feedback for each grade
 const getGradeRemarks = (grade) => {
   const remarks = {
-      'A': 'Outstanding work!',
-    'A-': 'Excellent performance!',
-    'B+': 'Very strong work',
-    'B': 'Well done!',
-    'B-': 'Aim Higher',
-     'C+': 'Can do better',
-    'C': 'Put more effort',
-    'C-': 'Seek help urgently',
-    'D+': 'Join study groups',
-    'D': 'Start tutoring sessions',
-    'D-': 'Connect for guidance',
-    'E': 'Create recovery plan'
+    'A': 'Excellent',
+    'A-': 'Very Good',
+    'B+': 'Good Attempt!',
+    'B': 'Good Attempt!',
+    'B-': 'Good',
+    'C+': 'Average',
+    'C': 'Average',
+    'C-': 'Can do better!',
+    'D+': 'Aim higher',
+    'D': 'Weak ',
+    'D-': 'Pull up your socks',
+    'E': 'Pull up your socks'
   };
   
   return remarks[grade] || 'Let\'s discuss your progress together.';
 };
 
-  // Get selected term info
+
   const getSelectedTermInfo = () => {
     if (!filters.term_id) return null;
     const selectedTerm = filterOptions.terms.find(term =>
@@ -368,14 +366,14 @@ const getGradeRemarks = (grade) => {
     return selectedTerm ? `${selectedTerm.term_name} - ${selectedTerm.academic_year}` : '';
   };
 
-  // Calculate class average
+
   const calculateClassAverage = () => {
     if (results.length === 0) return '0.00';
     const total = results.reduce((sum, student) => sum + parseFloat(student.average_score || 0), 0);
     return (total / results.length).toFixed(2);
   };
 
-  // Grade variant for badges
+
   const getGradeVariant = (grade) => {
     const gradeVariants = {
       'A': 'success',
@@ -388,7 +386,7 @@ const getGradeRemarks = (grade) => {
     return gradeVariants[grade?.[0]] || 'default';
   };
 
-  // Get subject abbreviation for table display
+
   const getSubjectAbbreviation = (subjectName) => {
     const abbreviations = {
       'ENGLISH': 'ENG',
@@ -440,7 +438,7 @@ const getGradeRemarks = (grade) => {
     }));
   };
 
-  // Desktop table columns
+ 
   const baseColumns = [
     {
       key: 'index',

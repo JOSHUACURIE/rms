@@ -82,15 +82,14 @@ const Sidebar = ({ isOpen, onToggle }) => {
 
   return (
     <>
-      {/* 🔹 Hamburger button for mobile */}
+      
       <button className="sidebar-toggle-btn" onClick={() => onToggle(!isOpen)}>
         {isOpen ? <FaTimes /> : <FaBars />}
       </button>
 
-      {/* 🔹 Dim overlay when sidebar is open on mobile */}
+    
       {isOpen && <div className="sidebar-overlay" onClick={() => onToggle(false)} />}
 
-      {/* 🔹 Sidebar content */}
       <aside className={`sidebar ${isOpen ? 'sidebar-open' : ''}`}>
         <div className="sidebar-header">
           <div className="sidebar-logo">

@@ -14,7 +14,7 @@
   line-height: 1.2;
 }
 
-/* Smooth hover animation */
+
 .btn:hover:not(:disabled) {
   transform: translateY(-1px);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
@@ -26,7 +26,7 @@
 }
 
 .btn:focus-visible {
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3);
+  box-shadow: 0 0 0 3px rgba(50, 214, 9, 0.3);
 }
 
 /* Sizes */
@@ -45,13 +45,13 @@
   font-size: 1.125rem; 
 }
 
-/* Variants */
+
 .btn--primary {
-  background-color: var(--primary, #2563eb);
-  color: #fff;
+  background-color: var(--primary, #1e9e0d);
+  color: #ffffff;
 }
 .btn--primary:hover {
-  background-color: #1e40af;
+  background-color: #1eaf31;
 }
 
 .btn--secondary {
@@ -87,9 +87,6 @@
   box-shadow: none;
 }
 
-/* ====== RESPONSIVENESS ====== */
-
-/* Tablets (medium screens) */
 @media (max-width: 992px) {
   .btn--sm {
     font-size: 0.9rem;

@@ -405,7 +405,7 @@ const ManageTeachers = () => {
   if (loading) {
     return (
       <div className="manage-teachers">
-        <div className="page-header">
+        <div className="page-headers">
           <h1 className="page-title">Manage Teachers</h1>
         </div>
         <Card>
@@ -417,7 +417,7 @@ const ManageTeachers = () => {
 
   return (
     <div className="manage-teachers">
-      <div className="page-header">
+      <div className="page-headers">
         <h1 className="page-title">Manage Teachers</h1>
         <Button onClick={() => setShowAddModal(true)} className="add-teacher-btn">
           + Add Teacher
@@ -452,7 +452,7 @@ const ManageTeachers = () => {
             </div>
           ) : (
             <>
-              {/* Desktop Table */}
+      
               <table className="teachers-table desktop-table">
                 <thead>
                   <tr>

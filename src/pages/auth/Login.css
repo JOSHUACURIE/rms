@@ -1,31 +1,56 @@
-/* src/pages/auth/Login.css */
+
+:root {
+  
+ 
+ --card-color: #dadada;
+  --primary-green:#1aa34a;
+  --primary-dark: #1d4ed8;
+
+ 
+  --bg: #F9FAFB;
+  --surface: #FFFFFF;
+  --text: #111827;
+  --text-secondary: #4B5563;
+  --border: #E5E7EB;
+
+
+  --success: #10B981;
+  --warning: #F59E0B;
+  --error: #EF4444;
+  --info: #3B82F6;
+
+
+}
 .login-container {
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background-color: var();
+  background-color: #ffffff;;
   padding: var(--space-md);
+  margin: 0;
 }
 
-.login-card {
+.login-cards {
   width: 100%;
   max-width: 420px;
-  background-color: var(--surface);
-  border-radius: var(--radius);
+  background-color: var(--card-color);
+  border-radius: 10%;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   overflow: hidden;
+  padding: 25px;
 }
 
 .login-header {
   padding: var(--space-xl) var(--space-lg) var(--space-lg);
   text-align: center;
   background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-  color: white;
+  color: #00c8e2;
 }
 
 .login-title {
   font-size: 1.5rem;
+  color: var(--primary-green);
   font-weight: 700;
   margin-bottom: var(--space-xs);
 }
@@ -33,6 +58,7 @@
 .login-subtitle {
   font-size: 0.95rem;
   opacity: 0.9;
+  color:#1aa34a;
 }
 
 .login-form {
@@ -50,11 +76,19 @@
 }
 
 .login-submit-btn {
+  background-color:#1aa34a;;
   width: 100%;
   margin-top: var(--space-lg);
 }
 
-/* Responsive */
+.login-footer a{
+  text-decoration: none;
+  color: #1aa34a;
+
+}
+
+
+
 @media (max-width: 480px) {
   .login-card {
     margin: var(--space-md);

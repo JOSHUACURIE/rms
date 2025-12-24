@@ -1,7 +1,7 @@
-
 import React from 'react';
 import { useAuth } from '../../hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
+import { FaSignOutAlt } from 'react-icons/fa';
 import './Navbar.css';
 
 const Navbar = () => {
@@ -13,7 +13,6 @@ const Navbar = () => {
     navigate('/login');
   };
 
- 
   const getRoleDisplayName = (role) => {
     const roles = {
       dos: 'Director of Studies',
@@ -21,6 +20,12 @@ const Navbar = () => {
       principal: 'Principal'
     };
     return roles[role] || role;
+  };
+
+  const getUserName = () => {
+    if (user?.fullname) return user.fullname;
+    if (user?.name) return user.name;
+    return 'User';
   };
 
   return (
@@ -34,7 +39,7 @@ const Navbar = () => {
           {user && (
             <div className="user-info">
               <div className="user-details">
-                <span className="user-name">{user.name}</span>
+                <span className="user-name">{getUserName()}</span>
                 <span className="user-role">
                   {getRoleDisplayName(user.role)}
                 </span>
@@ -46,6 +51,7 @@ const Navbar = () => {
                 aria-label="Logout"
               >
                 Logout
+                <FaSignOutAlt />
               </button>
             </div>
           )}

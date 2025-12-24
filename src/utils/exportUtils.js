@@ -220,18 +220,18 @@ const getSubjectAbbreviation = (subjectName) => {
 
 const getGradeRemarks = (grade) => {
   const remarks = {
-    'A': 'Excellent - Outstanding performance',
-    'A-': 'Excellent - Very strong performance',
-    'B+': 'Very Good - Strong performance',
-    'B': 'Good - Above average performance',
-    'B-': 'Good - Good performance',
-    'C+': 'Average - Satisfactory performance',
-    'C': 'Below Average - Needs improvement',
-    'C-': 'Below Average - Requires attention',
-    'D+': 'Weak - Significant improvement needed',
-    'D': 'Weak - Much improvement required',
-    'D-': 'Weak - Serious attention needed',
-    'E': 'Weak - Much attention required'
+    'A': 'Excellent',
+    'A-': 'Very Good',
+    'B+': 'Good Attempt!',
+    'B': 'Good Attempt!',
+    'B-': 'Good',
+    'C+': 'Average',
+    'C': 'Average',
+    'C-': 'Can do better!',
+    'D+': 'Aim higher',
+    'D': 'Weak ',
+    'D-': 'Pull up your socks',
+    'E': 'Pull up your socks'
   };
   return remarks[grade] || 'Performance assessment pending';
 };

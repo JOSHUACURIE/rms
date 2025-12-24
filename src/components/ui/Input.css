@@ -1,164 +1,334 @@
-.input-group {
-  margin-bottom: var(--space-lg, 1.25rem);
-  width: 100%;
-  max-width: 100%;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.input-label {
-  display: block;
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--text, #111827);
-  margin-bottom: var(--space-xs, 0.25rem);
-  word-wrap: break-word;
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  background: #ffffff; 
+  min-height: 80vh;
+  
 }
 
-.input-required {
-  color: var(--error, #dc2626);
-  margin-left: 4px;
-}
-
-/* Input field wrapper */
-.input-wrapper {
-  position: relative;
+.glass-container {
   display: flex;
   align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+  padding: 1rem;
+  position: relative;
+  background: #ffffff;
 }
 
-/* Input field base */
-.input-field {
+
+.glass-card {
   width: 100%;
-  padding: var(--space-sm, 0.625rem) var(--space-md, 1rem);
-  font-size: 1rem;
-  border: 1px solid var(--border, #d1d5db);
-  border-radius: var(--radius, 8px);
-  background-color: var(--surface, #ffffff);
-  color: var(--text, #111827);
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  max-width: 420px;
+  background: #ffffff;
+  border-radius: 24px;
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.08),
+    0 4px 15px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  transition: all 0.4s ease;
+  animation: fadeInUp 0.8s ease-out;
+  border: 1px solid #f1f5f9;
 }
 
-/* Focus state */
-.input-field:focus {
-  outline: none;
-  border-color: var(--primary, #2563eb);
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+.glass-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.1),
+    0 8px 25px rgba(0, 0, 0, 0.08);
 }
 
-/* Placeholder text */
-.input-field::placeholder {
-  color: #9ca3af;
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-/* Icon spacing */
-.input-field--with-start {
-  padding-left: 2.5rem;
+.card-inner {
+  padding: 2.5rem;
 }
 
-.input-field--with-end {
-  padding-right: 2.5rem;
+/* Header */
+.login-header {
+  text-align: center;
+  margin-bottom: 2rem;
 }
 
-/* Icons */
-.input-icon {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  color: var(--text-secondary, #6b7280);
-  pointer-events: none;
-  font-size: 1.125rem;
+.logo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
 }
 
-.input-icon--start {
-  left: var(--space-md, 1rem);
+.logo-icon {
+  font-size: 4.5rem;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+}
+.logo-icon img{
+  border-radius: 50%;
+}
+.login-title {
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: #00a2ff;
+  margin-bottom: 0.25rem;
 }
 
-.input-icon--end {
-  right: var(--space-md, 1rem);
-}
-
-/* Error styling */
-.input-group--error .input-field {
-  border-color: var(--error, #ef4444);
-}
-
-.input-group--error .input-field:focus {
-  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
-}
-
-.input-error {
-  margin-top: var(--space-xs, 0.25rem);
-  font-size: 0.8125rem;
-  color: var(--error, #ef4444);
+.login-subtitle {
+  font-size: 1.05rem;
+  color: #0184ff;
   font-weight: 500;
 }
 
-/* Disabled input */
-.input-field:disabled {
-  background-color: #f9fafb;
-  color: var(--text-secondary, #9ca3af);
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+
+.error-glass {
+  background: #fee2e2;
+  border: 1px solid #fca5a5;
+  border-radius: 12px;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-8px); }
+  75% { transform: translateX(8px); }
+}
+
+.error-icon {
+  font-size: 1.25rem;
+}
+
+.error-text {
+  font-size: 0.95rem;
+  color: #dc2626;
+}
+
+/* Input Groups */
+.input-glass-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.input-glass-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #475569;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-left: 0.25rem;
+}
+
+.label-icon {
+  font-size: 1.1rem;
+}
+
+.input-glass-wrapper {
+  position: relative;
+  border-radius: 14px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.input-glass-wrapper.focused,
+.input-glass-wrapper.has-value {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15);
+  background: #ffffff;
+}
+
+.input-glass-field {
+  width: 100%;
+  padding: 1rem;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #1e293b;
+  font-size: 1rem;
+}
+
+.input-glass-field::placeholder {
+  color: #94a3b8;
+}
+
+.input-glass-highlight {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.08), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.6s;
+}
+
+.input-glass-wrapper.focused .input-glass-highlight {
+  transform: translateX(100%);
+}
+
+
+.glass-submit-btn {
+  position: relative;
+  padding: 1rem 2rem;
+  margin-top: 1rem;
+  background:  #00a2ff;
+  border: none;
+  border-radius: 16px;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  box-shadow: 0 8px 25px rgba(99, 102, 241, 0.25);
+}
+
+.glass-submit-btn:hover:not(:disabled) {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 40px rgba(99, 102, 241, 0.35);
+}
+
+.glass-submit-btn:disabled {
+  opacity: 0.7;
   cursor: not-allowed;
+  transform: none;
 }
 
-/* ============================== */
-/* 🔹 Responsive Design Section   */
-/* ============================== */
-
-/* Tablet screens (≤992px) */
-@media (max-width: 992px) {
-  .input-label {
-    font-size: 0.875rem;
-  }
-  .input-field {
-    font-size: 0.95rem;
-    padding: 0.6rem 0.9rem;
-  }
+.btn-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  position: relative;
+  z-index: 2;
 }
 
-/* Mobile devices (≤768px) */
-@media (max-width: 768px) {
-  .input-group {
-    margin-bottom: 1rem;
-  }
-
-  .input-label {
-    font-size: 0.85rem;
-  }
-
-  .input-field {
-    font-size: 0.9rem;
-    padding: 0.55rem 0.85rem;
-    border-radius: 6px;
-  }
-
-  .input-icon {
-    font-size: 1rem;
-  }
-
-  .input-field--with-start {
-    padding-left: 2.2rem;
-  }
-
-  .input-field--with-end {
-    padding-right: 2.2rem;
-  }
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid transparent;
+  border-top: 2px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
 }
 
-/* Small mobile phones (≤480px) */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.btn-glow {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.3), transparent);
+  transform: translateY(100%);
+  transition: transform 0.6s;
+}
+
+.glass-submit-btn:hover .btn-glow {
+  transform: translateY(-100%);
+}
+
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 2rem 0;
+  color: #94a3b8;
+  font-size: 0.9rem;
+}
+
+.divider-line {
+  flex: 1;
+  height: 1px;
+  background: #e2e8f0;
+}
+
+.role-hint {
+  text-align: center;
+  color: #64748b;
+  font-size: 0.95rem;
+}
+
+.role-tags {
+  color: #6366f1;
+  font-weight: 600;
+}
+
+.login-footer {
+  margin-top: 2.5rem;
+  text-align: center;
+  font-size: 0.875rem;
+  color: #64748b;
+}
+
+.support-glass {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.support-link {
+  color:  #00a2ff;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.support-link:hover {
+  text-decoration: underline;
+}
+
+.security-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  font-size: 0.8rem;
+  color: #10b981;
+  font-weight: 500;
+}
+
+
 @media (max-width: 480px) {
-  .input-group {
-    margin-bottom: 0.875rem;
+  .card-inner {
+    padding: 2rem 1.5rem;
   }
-
-  .input-field {
-    font-size: 0.85rem;
-    padding: 0.5rem 0.75rem;
+  
+  .login-title {
+    font-size: 2.1rem;
   }
-
-  .input-label {
-    font-size: 0.8rem;
-  }
-
-  .input-icon {
-    font-size: 0.9rem;
+  
+  .logo-icon {
+    font-size: 3.8rem;
   }
 }

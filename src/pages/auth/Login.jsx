@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { authApi } from '../../api/api';
-import Button from '../../components/ui/Button';
-import Input from '../../components/ui/Input';
 import { useAuth } from '../../context/AuthContext';
 import './Login.css';
 
 const Login = () => {
+  const logo="/logo.png"
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [isEmailFocused, setIsEmailFocused] = useState(false);
+  const [isPasswordFocused, setIsPasswordFocused] = useState(false);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -19,7 +20,7 @@ const Login = () => {
   // Valid roles in the system
   const VALID_ROLES = ['dos', 'principal', 'teacher'];
 
-  // Normalize role to lowercase and validate
+  
   const normalizeRole = (role) => {
     if (!role) return null;
     
@@ -34,7 +35,7 @@ const Login = () => {
       return normalizeRole(userData.role);
     }
 
-    // Priority 2: Check roles array (legacy schema)
+    
     if (userData.roles) {
       if (Array.isArray(userData.roles) && userData.roles.length > 0) {
         return normalizeRole(userData.roles[0]);
@@ -58,7 +59,6 @@ const Login = () => {
       throw new Error('No user data received');
     }
 
-    // Check for required fields
     const requiredFields = ['user_id', 'email'];
     const missingFields = requiredFields.filter(field => !userData[field]);
 
@@ -66,7 +66,6 @@ const Login = () => {
       throw new Error(`Invalid user data: missing required fields (${missingFields.join(', ')})`);
     }
 
-    // Validate role
     const userRole = extractUserRole(userData);
     if (!userRole) {
       throw new Error('No valid role assigned to this account');
@@ -86,7 +85,6 @@ const Login = () => {
     setError('');
     setLoading(true);
 
-    // Basic validation
     if (!email.trim() || !password.trim()) {
       setError('Please enter both email and password');
       setLoading(false);
@@ -94,25 +92,20 @@ const Login = () => {
     }
 
     try {
-      // Call login API - it already returns { user, token }
       const result = await authApi.login({ 
         email: email.toLowerCase().trim(), 
         password: password.trim() 
       });
 
-      console.log('Login API Result:', result); // Debug log
-
-      // ✅ FIXED: Use the result directly as returned by authApi.login()
       const { user: userData, token } = result;
 
       if (!userData || !token) {
         throw new Error('Invalid response from server: missing user data or token');
       }
 
-      // Validate and normalize user data
+     
       const validatedUserData = validateUserData(userData);
 
-      // ✅ Save user & token in context
       login(validatedUserData, token);
 
       // Redirect based on role
@@ -122,7 +115,6 @@ const Login = () => {
     } catch (err) {
       console.error('Login error:', err);
       
-      // ✅ FIXED: Create new error message instead of modifying error object
       let errorMessage = 'Login failed. Please check your credentials and try again.';
       
       if (err.response?.data?.message) {
@@ -153,61 +145,112 @@ const Login = () => {
   };
 
   return (
-    <div className="login-container">
-      <div className="login-card">
-        <div className="login-header">
-          <h1 className="login-title">School Result Management</h1>
-          <p className="login-subtitle">Sign in to your account</p>
-        </div>
+    <div className="glass-container">
+      
+      <div className="bubbles">
+        {[...Array(15)].map((_, i) => (
+          <div key={i} className="bubble" style={{
+            '--i': i,
+            left: `${Math.random() * 100}%`,
+            animationDelay: `${Math.random() * 5}s`
+          }}></div>
+        ))}
+      </div>
 
-        <form onSubmit={handleSubmit} className="login-form">
-          {error && (
-            <div className="login-error">
-              <strong>Error:</strong> {error}
+    
+      <div className="glass-card">
+        <div className="card-inner">
+        
+          <div className="login-header">
+            <div className="logo-container">
+              <div className="logo-icon"><img src={logo}/></div>
+              <div className="logo-text">
+                <h1 className="login-title">LeraTech</h1>
+                <p className="login-subtitle">Academic Management System</p>
+              </div>
             </div>
-          )}
+          </div>
 
-          <Input
-            label="Email Address"
-            id="email"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            placeholder="e.g., name@school.edu"
-            autoComplete="email"
-          />
+     
+          <form onSubmit={handleSubmit} className="login-form">
+            {error && (
+              <div className="error-glass">
+                <span className="error-icon">⚠️</span>
+                <span className="error-text">{error}</span>
+              </div>
+            )}
 
-          <Input
-            label="Password"
-            id="password"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            placeholder="••••••••"
-            autoComplete="current-password"
-          />
+            {/* Email Input */}
+            <div className="input-glass-group">
+              <label htmlFor="email" className="input-glass-label">
+                <span className="label-icon">📧</span>
+                <span>Email Address</span>
+              </label>
+              <div className={`input-glass-wrapper ${isEmailFocused ? 'focused' : ''} ${email ? 'has-value' : ''}`}>
+                <input
+                  id="email"
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  onFocus={() => setIsEmailFocused(true)}
+                  onBlur={() => setIsEmailFocused(false)}
+                  required
+                  placeholder="name@school.edu"
+                  autoComplete="email"
+                  className="input-glass-field"
+                />
+                <div className="input-glass-highlight"></div>
+              </div>
+            </div>
 
-          <Button
-            type="submit"
-            variant="primary"
-            size="lg"
-            disabled={loading || !email.trim() || !password.trim()}
-            className="login-submit-btn"
-            fullWidth
-          >
-            {loading ? 'Signing in...' : 'Sign In'}
-          </Button>
-        </form>
+          
+            <div className="input-glass-group">
+              <label htmlFor="password" className="input-glass-label">
+                <span className="label-icon">🔒</span>
+                <span>Password</span>
+              </label>
+              <div className={`input-glass-wrapper ${isPasswordFocused ? 'focused' : ''} ${password ? 'has-value' : ''}`}>
+                <input
+                  id="password"
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  onFocus={() => setIsPasswordFocused(true)}
+                  onBlur={() => setIsPasswordFocused(false)}
+                  required
+                  placeholder="••••••••"
+                  autoComplete="current-password"
+                  className="input-glass-field"
+                />
+                <div className="input-glass-highlight"></div>
+              </div>
+            </div>
 
-        <div className="login-footer">
-          <p>
-            Having trouble? Contact{' '}
-            <a href="mailto:support@school.edu" className="support-link">
-              support@school.edu
-            </a>
-          </p>
+    
+            <button
+              type="submit"
+              disabled={loading || !email.trim() || !password.trim()}
+              className={`glass-submit-btn ${loading ? 'loading' : ''}`}
+            >
+              <span className="btn-content">
+                {loading ? (
+                  <>
+                    <span className="spinner"></span>
+                    <span>Authenticating...</span>
+                  </>
+                ) : (
+                  <>
+                    <span className="btn-icon">→</span>
+                    <span>Sign In</span>
+                  </>
+                )}
+              </span>
+              <div className="btn-glow"></div>
+            </button>
+
+      
+          </form>
+
         </div>
       </div>
     </div>

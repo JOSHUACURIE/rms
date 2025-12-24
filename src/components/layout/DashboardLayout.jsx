@@ -9,20 +9,19 @@ const DashboardLayout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const handleToggleSidebar = (state) => {
-    // If explicit boolean provided (from child), use it; otherwise toggle
     setIsSidebarOpen(state !== undefined ? state : !isSidebarOpen);
   };
 
   return (
     <div className={`dashboard-layout ${isSidebarOpen ? 'sidebar-active' : ''}`}>
-      {/* Sidebar */}
       <Sidebar isOpen={isSidebarOpen} onToggle={handleToggleSidebar} />
-
-      {/* Main Section */}
+      
       <div className="dashboard-main">
         <Navbar />
         <main className="dashboard-content">
-          <Outlet />
+          <div className="content-container">
+            <Outlet />
+          </div>
         </main>
       </div>
     </div>

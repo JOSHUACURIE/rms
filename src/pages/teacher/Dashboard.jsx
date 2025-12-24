@@ -64,7 +64,6 @@ const TeacherDashboard = () => {
     if (user) fetchData();
   }, [user]);
 
-  // Quick actions
   const handleViewSubjects = () => navigate('/teacher/assigned-subjects');
   const handleSubmitScores = () => navigate('/teacher/submit-scores');
   const handleMessageAdmin = () => navigate('/teacher/message-admin');
